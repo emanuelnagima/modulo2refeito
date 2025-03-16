@@ -10,7 +10,7 @@ export default async function conectar() {
             host: 'localhost',
             user: 'root',
             database: 'backend',
-            port: 3066,
+            port: 3306,
             waitForConnections: true,
             connectionLimit: 20,
             maxIdle: 10, // max idle connections

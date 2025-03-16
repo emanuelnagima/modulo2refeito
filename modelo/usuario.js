@@ -1,59 +1,75 @@
-export default class Usuario{
+import UsuarioDB from "../database/usuarioDB.js";
 
+export default class Usuario {
     #nome;
     #email;
     #senha;
     #telefone;
     
-    constructor(nome, email, senha, telefone){
+    constructor(nome, email, senha, telefone) {
         this.#nome = nome;
         this.#email = email;
         this.#senha = senha;
         this.#telefone = telefone;
     }
-    
-    
-    
-    get nome(){
+
+    // Getters
+    get nome() {
         return this.#nome;
     }
-    get email(){
+
+    get email() {
         return this.#email;
     }
-    
-    get senha(){
+
+    get senha() {
         return this.#senha;
     }
-    
-    get telefone(){
+
+    get telefone() {
         return this.#telefone;
     }
-    
-    set nome(novoNome){
+
+    // Setters
+    set nome(novoNome) {
         this.#nome = novoNome;
     }
-    
-    set email(novoEmail){
+
+    set email(novoEmail) {
         this.#email = novoEmail;
     }
-    
-    set senha(novoSenha){
-        this.#senha = novoSenha;
+
+    set senha(novaSenha) {
+        this.#senha = novaSenha;
     }
-    
-    set telefone(novoTelefone){
+
+    set telefone(novoTelefone) {
         this.#telefone = novoTelefone;
-        
     }
 
-    ToJSON(){
-        return{
-            "nome":this.#nome,
-            "email":this.#email,
-            "senha":this.#senha,
-            "telefone":this.#telefone
-        }
+    // Método para converter o objeto em JSON
+    toJSON() {
+        return {
+            nome: this.#nome,
+            email: this.#email,
+            senha: this.#senha,
+            telefone: this.#telefone
+        };
     }
 
-
+    // Métodos assíncronos com await
+    async gravar() {
+        const usuDB = new UsuarioDB();
+        await usuDB.gravar(this);
     }
+
+    async excluir() {
+        const usuDB = new UsuarioDB();
+        await usuDB.excluir(this);
+    }
+
+    async consultar() {
+        const usuDB = new UsuarioDB();
+        return await usuDB.consultar(this);
+    }
+}
